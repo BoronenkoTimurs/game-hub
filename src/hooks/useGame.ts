@@ -1,10 +1,6 @@
 import { GameQuary } from "../App";
 import useData from "./useData";
 
-interface Sort{
-  
-}
-
 export interface Platform{
     id: number;
     name: string;
@@ -23,7 +19,8 @@ const useGames = (gameQuary: GameQuary) =>
     params: {
       genres: gameQuary.genre?.id, 
       platforms: gameQuary.platform?.id,
-      ordering:gameQuary.sortOrder
+      ordering:gameQuary.sortOrder,
+      search: gameQuary.searchText
     }},     
     [gameQuary]);
   
