@@ -5,7 +5,7 @@ import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
 import PlatformSelector from "./components/PlatformSelector";
-import { Game, Platform } from "./hooks/useGame";
+import { Platform } from "./hooks/useGame";
 import SortSelector from "./components/SortSelector";
 
 export interface GameQuary {
@@ -30,6 +30,7 @@ function App() {
       <GridItem area="nav">
         <NavBar />
       </GridItem>
+
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <GenreList
@@ -40,7 +41,8 @@ function App() {
       </Show>
       <GridItem area="main">
         <Flex paddingLeft={2} marginBottom={5}>
-          <Box marginRight={5}>
+          <Box marginRight={0}>
+            {/* TODO: work with marginRight(have a bug) */}
             <PlatformSelector
               selectedPlatform={gameQuary.platform}
               onSelectPlatform={(platform) =>
