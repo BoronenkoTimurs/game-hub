@@ -7,6 +7,7 @@ import { Genre } from "./hooks/useGenres";
 import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/useGame";
 import SortSelector from "./components/SortSelector";
+import GameHeading from "./components/GameHeading";
 
 export interface GameQuary {
   genre: Genre | null;
@@ -29,7 +30,9 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <NavBar onSearch={searchText => setGameQuary({...gameQuary, searchText})}/>
+        <NavBar
+          onSearch={(searchText) => setGameQuary({ ...gameQuary, searchText })}
+        />
       </GridItem>
 
       <Show above="lg">
@@ -41,23 +44,26 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <Flex paddingLeft={2} marginBottom={5}>
-          <Box marginRight={0}>
-            {/* TODO: work with marginRight(have a bug) */}
-            <PlatformSelector
-              selectedPlatform={gameQuary.platform}
-              onSelectPlatform={(platform) =>
-                setGameQuary({ ...gameQuary, platform })
+        <Box paddingLeft={2}>
+          <GameHeading gameQuary={gameQuary} />
+          <Flex marginBottom={5}>
+            <Box marginRight={0}>
+              {/* TODO: work with marginRight(have a bug) */}
+              <PlatformSelector
+                selectedPlatform={gameQuary.platform}
+                onSelectPlatform={(platform) =>
+                  setGameQuary({ ...gameQuary, platform })
+                }
+              ></PlatformSelector>
+            </Box>
+            <SortSelector
+              sortOrder={gameQuary.sortOrder}
+              onSelectSortOrder={(sortOrder) =>
+                setGameQuary({ ...gameQuary, sortOrder })
               }
-            ></PlatformSelector>
-          </Box>
-          <SortSelector
-            sortOrder={gameQuary.sortOrder}
-            onSelectSortOrder={(sortOrder) =>
-              setGameQuary({ ...gameQuary, sortOrder })
-            }
-          ></SortSelector>
-        </Flex>
+            ></SortSelector>
+          </Flex>
+        </Box>
         <GameGrid gameQuary={gameQuary} />
       </GridItem>
     </Grid>
